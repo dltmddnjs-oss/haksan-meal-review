@@ -1,6 +1,6 @@
-/* ================================
-   학산급식리뷰 - Cute Pastel Style
-   ================================ */
+/* ========================================
+   학산급식리뷰 - Cute Pastel Design
+   ======================================== */
 
 * {
     box-sizing: border-box;
@@ -8,27 +8,20 @@
 
 body {
     margin: 0;
-    font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-    background: #fcf7ff;
-    color: #51456d;
+    background: #fcf8ff;
+    color: #51436d;
+    font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
-/* ---------- 전체 영역 ---------- */
-
-main {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 28px 80px;
-}
-
-/* ---------- 상단 헤더 ---------- */
+/* ========================================
+   상단
+   ======================================== */
 
 header {
-    background: linear-gradient(135deg, #eadbff, #ffe5f3);
+    background: linear-gradient(135deg, #e8d9ff, #ffe4f2);
     border-radius: 0 0 42px 42px;
-    padding: 28px 7%;
-    box-shadow: 0 8px 25px rgba(150, 120, 190, 0.12);
+    padding: 30px 7%;
+    box-shadow: 0 8px 25px rgba(120, 90, 160, 0.10);
 }
 
 .header-content {
@@ -39,82 +32,164 @@ header {
     gap: 25px;
 }
 
-/* 토끼 캐릭터 */
+/* 상단 토끼 */
 
 .chef-rabbit {
-    width: 110px;
-    height: 110px;
+    width: 112px;
+    height: 112px;
+    position: relative;
+    flex-shrink: 0;
     background: white;
     border-radius: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 62px;
     box-shadow: 0 8px 20px rgba(120, 90, 160, 0.15);
+    font-size: 0;
 }
+
+/* 토끼 얼굴 */
+
+.chef-rabbit::before {
+    content: "";
+    position: absolute;
+    width: 68px;
+    height: 58px;
+    left: 22px;
+    top: 39px;
+    background: #f4f1f5;
+    border-radius: 48% 48% 45% 45%;
+    box-shadow:
+        -21px -30px 0 -10px #f4f1f5,
+        21px -30px 0 -10px #f4f1f5;
+}
+
+/* 토끼 눈 + 코 */
+
+.chef-rabbit::after {
+    content: "✦   ✦\A    ᴗ";
+    white-space: pre;
+    position: absolute;
+    left: 0;
+    top: 53px;
+    width: 100%;
+    text-align: center;
+    color: #554365;
+    font-size: 17px;
+    line-height: 25px;
+    font-weight: bold;
+    text-shadow:
+        0 0 3px #ffffff,
+        0 0 5px #d9bfff;
+}
+
+/* 제목 */
 
 header h1 {
     margin: 0;
     font-size: 38px;
     font-weight: 800;
-    color: #5b477e;
+    color: #5b477c;
 }
 
 header p {
     margin: 8px 0 0;
     font-size: 18px;
-    color: #806c9e;
+    color: #806b9c;
 }
 
-/* ---------- 날짜 선택 ---------- */
+/* ========================================
+   메인
+   ======================================== */
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 25px 80px;
+}
+
+/* ========================================
+   날짜 영역
+   ======================================== */
 
 .date-navigation {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 14px;
-    margin: 35px auto;
+    gap: 12px;
+    margin: 30px auto;
 }
 
 .date-navigation button {
+    width: 58px;
+    height: 58px;
     border: none;
-    background: white;
-    color: #8062a5;
     border-radius: 18px;
-    padding: 15px 20px;
-    font-size: 18px;
+    background: white;
+    color: #8063a3;
+    font-size: 25px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(130, 100, 170, 0.12);
+    box-shadow: 0 6px 16px rgba(130, 100, 170, 0.12);
+    transition: 0.2s;
 }
 
 .date-navigation button:hover {
     transform: translateY(-2px);
+    background: #f8efff;
 }
 
 input[type="date"] {
-    border: 2px solid #dfcaf5;
-    background: white;
-    color: #67557e;
+    height: 58px;
+    border: 2px solid #dfc9f5;
     border-radius: 18px;
-    padding: 14px 18px;
+    padding: 0 18px;
+    background: white;
+    color: #655379;
     font-size: 16px;
+    font-family: inherit;
+    outline: none;
 }
 
-/* ---------- 카드 ---------- */
+input[type="date"]:focus {
+    border-color: #b995d9;
+    box-shadow: 0 0 0 4px rgba(185, 149, 217, 0.12);
+}
+
+/* 급식 보기 버튼 */
+
+#mealButton,
+button[type="submit"] {
+    border: none;
+    border-radius: 18px;
+    background: #a788ce;
+    color: white;
+    padding: 15px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#mealButton:hover,
+button[type="submit"]:hover {
+    background: #9674bf;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   카드
+   ======================================== */
 
 .card {
     background: white;
     border-radius: 32px;
     padding: 38px;
     margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(130, 100, 170, 0.09);
+    box-shadow: 0 10px 30px rgba(120, 90, 160, 0.08);
 }
 
 .section-title {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 15px;
 }
 
 .section-title span {
@@ -123,39 +198,71 @@ input[type="date"] {
 
 .section-title h2 {
     margin: 0;
+    color: #594574;
     font-size: 28px;
-    color: #594575;
 }
 
 .date-text {
-    color: #88779f;
+    margin: 0;
+    color: #88779d;
     font-size: 16px;
 }
 
-/* ---------- 급식 목록 ---------- */
+/* ========================================
+   오늘의 급식
+   ======================================== */
 
 .meal-content {
     display: flex;
     align-items: center;
-    gap: 45px;
+    gap: 40px;
     margin-top: 25px;
 }
 
 .meal-character {
+    width: 170px;
     min-width: 170px;
     text-align: center;
+    font-size: 0;
 }
 
-.meal-character::first-line {
-    font-size: 60px;
+/* 급식 옆 귀여운 토끼 */
+
+.meal-character::before {
+    content: "";
+    display: block;
+    width: 78px;
+    height: 68px;
+    margin: 0 auto 15px;
+    background: #f1eef3;
+    border-radius: 48% 48% 45% 45%;
+    box-shadow:
+        -25px -31px 0 -12px #f1eef3,
+        25px -31px 0 -12px #f1eef3;
+}
+
+.meal-character::after {
+    content: "✦  ✦\A  ᴗ";
+    white-space: pre;
+    display: block;
+    position: relative;
+    margin-top: -76px;
+    height: 76px;
+    padding-top: 19px;
+    color: #57466c;
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: bold;
 }
 
 .meal-character span {
     display: block;
-    margin-top: 12px;
-    color: #8a72a8;
+    margin-top: 20px;
+    color: #856da2;
     font-size: 17px;
 }
+
+/* 급식 목록 */
 
 #mealList {
     list-style: none;
@@ -165,8 +272,8 @@ input[type="date"] {
 }
 
 #mealList li {
-    background: #faf4ff;
-    border: 1px solid #eee1fa;
+    background: #faf5ff;
+    border: 1px solid #eee0fa;
     border-radius: 22px;
     padding: 17px 24px;
     margin-bottom: 12px;
@@ -179,45 +286,74 @@ input[type="date"] {
     transform: translateX(4px);
 }
 
-/* ---------- 만족도 ---------- */
+/* ========================================
+   만족도
+   ======================================== */
 
 .rating-card {
     text-align: center;
 }
 
 .rating-card h2 {
-    color: #594575;
+    color: #594574;
 }
 
 .rating-number {
+    color: #896ab1;
     font-size: 48px;
     font-weight: 800;
-    color: #8b6bb5;
     margin: 10px 0;
 }
 
 .stars {
+    color: #f6b83f;
     font-size: 34px;
-    letter-spacing: 6px;
-    color: #f6b940;
+    letter-spacing: 5px;
 }
-
-/* ---------- 고양이 ---------- */
 
 .rating-character {
-    font-size: 65px;
-    margin: 15px 0 5px;
+    font-size: 0;
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    position: relative;
 }
 
-.rating-message {
-    color: #8a72a8;
-    font-size: 17px;
+/* 고양이 얼굴 */
+
+.rating-character::before {
+    content: "";
+    position: absolute;
+    width: 82px;
+    height: 70px;
+    left: 9px;
+    top: 20px;
+    background: #f6b4d0;
+    border-radius: 45% 45% 48% 48%;
+    box-shadow:
+        -26px -20px 0 -8px #f6b4d0,
+        26px -20px 0 -8px #f6b4d0;
 }
 
-/* ---------- 리뷰 작성 ---------- */
+.rating-character::after {
+    content: "●   ●\A    ᴗ";
+    white-space: pre;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 38px;
+    color: #624968;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+/* ========================================
+   리뷰 작성
+   ======================================== */
 
 .review-card h2 {
-    color: #594575;
+    color: #594574;
 }
 
 .review-card textarea {
@@ -227,16 +363,16 @@ input[type="date"] {
     border: 2px solid #eadcf5;
     border-radius: 22px;
     padding: 20px;
+    background: #fffaff;
+    color: #51436d;
     font-family: inherit;
     font-size: 16px;
-    color: #51456d;
-    background: #fffaff;
     outline: none;
 }
 
 .review-card textarea:focus {
-    border-color: #c7a8e8;
-    box-shadow: 0 0 0 4px rgba(199, 168, 232, 0.15);
+    border-color: #c4a3e4;
+    box-shadow: 0 0 0 4px rgba(196, 163, 228, 0.13);
 }
 
 .review-button {
@@ -245,39 +381,42 @@ input[type="date"] {
     border-radius: 20px;
     padding: 17px;
     margin-top: 15px;
-    background: linear-gradient(135deg, #a989d0, #c49ade);
+    background: linear-gradient(135deg, #a98bd0, #c09add);
     color: white;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 7px 18px rgba(150, 110, 190, 0.2);
+    box-shadow: 0 7px 18px rgba(150, 110, 190, 0.18);
     transition: 0.2s;
 }
 
 .review-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(150, 110, 190, 0.25);
 }
 
-/* ---------- 최근 리뷰 ---------- */
+/* ========================================
+   최근 리뷰
+   ======================================== */
 
 .review-item {
     background: #faf6ff;
+    border: 1px solid #eee3f8;
     border-radius: 20px;
     padding: 18px 22px;
     margin-bottom: 12px;
-    border: 1px solid #eee4f7;
 }
 
 .review-item p {
     margin: 6px 0;
 }
 
-.review-item .review-star {
-    color: #f6b940;
+.review-star {
+    color: #f6b83f;
 }
 
-/* ---------- 반응형 ---------- */
+/* ========================================
+   모바일
+   ======================================== */
 
 @media (max-width: 700px) {
 
@@ -290,10 +429,20 @@ input[type="date"] {
     }
 
     .chef-rabbit {
-        width: 80px;
-        height: 80px;
+        width: 82px;
+        height: 82px;
         border-radius: 24px;
-        font-size: 45px;
+    }
+
+    .chef-rabbit::before {
+        transform: scale(0.75);
+        transform-origin: center;
+    }
+
+    .chef-rabbit::after {
+        transform: scale(0.75);
+        transform-origin: center;
+        top: 39px;
     }
 
     header h1 {
@@ -315,11 +464,11 @@ input[type="date"] {
 
     .meal-content {
         flex-direction: column;
-        gap: 20px;
+        gap: 25px;
     }
 
     .meal-character {
-        min-width: auto;
+        width: 100%;
     }
 
     .section-title h2 {
@@ -328,5 +477,9 @@ input[type="date"] {
 
     #mealList li {
         font-size: 16px;
+    }
+
+    .date-navigation {
+        flex-wrap: wrap;
     }
 }
