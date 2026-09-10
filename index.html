@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>학산급식리뷰</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 상단 -->
+    <header>
+        <div class="header-content">
+            <div class="chef-rabbit">🐰</div>
+
+            <div>
+                <h1>학산급식리뷰</h1>
+                <p>오늘 뭐 나와? 🍚</p>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- 날짜 선택 -->
+        <section class="date-section">
+
+            <button id="prevDay">〈</button>
+
+            <div>
+                <span>📅</span>
+                <input type="date" id="mealDate">
+            </div>
+
+            <button id="nextDay">〉</button>
+
+            <button id="searchBtn">급식 보기</button>
+
+        </section>
+
+
+        <!-- 오늘의 급식 -->
+        <section class="card meal-card">
+
+            <div class="section-title">
+                <span>🍱</span>
+                <h2>오늘의 급식</h2>
+            </div>
+
+            <p id="mealDateText" class="date-text">
+                오늘의 급식을 확인해보세요!
+            </p>
+
+            <div class="meal-content">
+
+                <div class="meal-character">
+                    🐰
+                    <span>맛있게 드세요!</span>
+                </div>
+
+                <ul id="mealList">
+                    <li>급식 정보를 불러오는 중이에요!</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- 만족도 -->
+        <section class="card rating-card">
+
+            <div class="section-title">
+                <span>⭐</span>
+                <h2>오늘의 만족도</h2>
+            </div>
+
+            <div class="rating-content">
+
+                <div class="cat-character">
+                    🐱
+                    <span>맛있었나요...?<br>별점 부탁해요! ✨</span>
+                </div>
+
+                <div class="rating-result">
+
+                    <div id="averageRating">
+                        0.0
+                    </div>
+
+                    <div id="averageStars" class="stars">
+                        ☆☆☆☆☆
+                    </div>
+
+                    <p>
+                        <span id="reviewCount">0</span>개의 리뷰
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- 리뷰 작성 -->
+        <section class="card review-write">
+
+            <div class="section-title">
+                <span>✏️</span>
+                <h2>리뷰 작성</h2>
+            </div>
+
+            <p class="guide">
+                오늘 급식은 어땠나요?
+            </p>
+
+            <div class="rating-input">
+
+                <button class="star-btn" data-rating="1">☆</button>
+                <button class="star-btn" data-rating="2">☆</button>
+                <button class="star-btn" data-rating="3">☆</button>
+                <button class="star-btn" data-rating="4">☆</button>
+                <button class="star-btn" data-rating="5">☆</button>
+
+            </div>
+
+            <textarea
+                id="reviewText"
+                placeholder="급식에 대한 솔직한 리뷰를 남겨주세요! 💕"
+                maxlength="100"
+            ></textarea>
+
+            <button id="submitReview" class="submit-btn">
+                리뷰 등록하기 💕
+            </button>
+
+        </section>
+
+
+        <!-- 최근 리뷰 -->
+        <section class="card">
+
+            <div class="section-title">
+                <span>💬</span>
+                <h2>최근 리뷰</h2>
+            </div>
+
+            <div id="reviewList">
+
+                <p class="empty-message">
+                    아직 작성된 리뷰가 없어요 🥺
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>🍚 학산여자고등학교 급식 리뷰 프로젝트</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
