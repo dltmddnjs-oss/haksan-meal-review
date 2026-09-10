@@ -1,174 +1,160 @@
+/* ================================
+   학산급식리뷰 - Cute Pastel Style
+   ================================ */
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: "Pretendard", "Noto Sans KR", sans-serif;
-    background: #fff8fc;
-    color: #4b3b59;
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+    background: #fcf7ff;
+    color: #51456d;
 }
 
-/* =========================
-   상단 헤더
-========================= */
+/* ---------- 전체 영역 ---------- */
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+}
+
+/* ---------- 상단 헤더 ---------- */
 
 header {
-    background: linear-gradient(135deg, #eadcff, #ffe5f3);
-    border-radius: 0 0 35px 35px;
-    padding: 28px 20px 32px;
-    box-shadow: 0 5px 18px rgba(120, 90, 150, 0.12);
+    background: linear-gradient(135deg, #eadbff, #ffe5f3);
+    border-radius: 0 0 42px 42px;
+    padding: 28px 7%;
+    box-shadow: 0 8px 25px rgba(150, 120, 190, 0.12);
 }
 
 .header-content {
-    max-width: 1050px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     gap: 25px;
 }
 
+/* 토끼 캐릭터 */
+
 .chef-rabbit {
-    width: 105px;
-    height: 105px;
-    border-radius: 30px;
+    width: 110px;
+    height: 110px;
     background: white;
+    border-radius: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 65px;
-    box-shadow: 0 7px 15px rgba(120, 90, 150, 0.15);
+    font-size: 62px;
+    box-shadow: 0 8px 20px rgba(120, 90, 160, 0.15);
 }
 
 header h1 {
-    margin: 0 0 8px;
+    margin: 0;
     font-size: 38px;
     font-weight: 800;
-    color: #654b82;
+    color: #5b477e;
 }
 
 header p {
-    margin: 0;
+    margin: 8px 0 0;
     font-size: 18px;
-    color: #80678f;
+    color: #806c9e;
 }
 
-/* =========================
-   날짜 선택
-========================= */
+/* ---------- 날짜 선택 ---------- */
 
-.date-control {
-    max-width: 1050px;
-    margin: 35px auto 25px;
+.date-navigation {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    margin: 35px auto;
 }
 
-.date-control button {
+.date-navigation button {
     border: none;
     background: white;
-    color: #76549a;
-    font-size: 25px;
-    width: 58px;
-    height: 58px;
+    color: #8062a5;
     border-radius: 18px;
+    padding: 15px 20px;
+    font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(120, 90, 150, 0.12);
+    box-shadow: 0 5px 15px rgba(130, 100, 170, 0.12);
 }
 
-.date-control button:hover {
+.date-navigation button:hover {
     transform: translateY(-2px);
 }
 
 input[type="date"] {
-    border: 2px solid #dfc9f0;
+    border: 2px solid #dfcaf5;
     background: white;
+    color: #67557e;
     border-radius: 18px;
-    padding: 16px 18px;
+    padding: 14px 18px;
     font-size: 16px;
-    color: #665174;
 }
 
-/* 급식 보기 버튼 */
-
-button {
-    font-family: inherit;
-}
-
-#mealButton {
-    border: none;
-    background: #9b7ac5;
-    color: white;
-    font-weight: 700;
-    padding: 17px 25px;
-    border-radius: 18px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 5px 12px rgba(120, 90, 150, 0.18);
-}
-
-#mealButton:hover {
-    background: #8765b2;
-}
-
-/* =========================
-   카드 공통
-========================= */
+/* ---------- 카드 ---------- */
 
 .card {
-    max-width: 1050px;
-    margin: 25px auto;
     background: white;
-    border-radius: 30px;
+    border-radius: 32px;
     padding: 38px;
-    box-shadow: 0 8px 25px rgba(120, 90, 150, 0.10);
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(130, 100, 170, 0.09);
 }
 
 .section-title {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .section-title span {
-    font-size: 27px;
+    font-size: 30px;
 }
 
 .section-title h2 {
     margin: 0;
-    font-size: 27px;
-    color: #5b4371;
+    font-size: 28px;
+    color: #594575;
 }
 
 .date-text {
-    color: #9b84a8;
-    margin-bottom: 28px;
+    color: #88779f;
+    font-size: 16px;
 }
 
-/* =========================
-   오늘의 급식
-========================= */
+/* ---------- 급식 목록 ---------- */
 
 .meal-content {
     display: flex;
     align-items: center;
     gap: 45px;
+    margin-top: 25px;
 }
 
 .meal-character {
-    width: 180px;
-    min-width: 180px;
+    min-width: 170px;
     text-align: center;
+}
+
+.meal-character::first-line {
+    font-size: 60px;
 }
 
 .meal-character span {
     display: block;
     margin-top: 12px;
-    color: #80618f;
-    font-weight: 600;
+    color: #8a72a8;
+    font-size: 17px;
 }
 
 #mealList {
@@ -179,132 +165,152 @@ button {
 }
 
 #mealList li {
-    background: #faf5ff;
-    border: 1px solid #eee2f7;
-    border-radius: 18px;
-    padding: 17px 22px;
-    margin: 10px 0;
+    background: #faf4ff;
+    border: 1px solid #eee1fa;
+    border-radius: 22px;
+    padding: 17px 24px;
+    margin-bottom: 12px;
     font-size: 18px;
     transition: 0.2s;
 }
 
 #mealList li:hover {
-    background: #f3eaff;
+    background: #f5eaff;
     transform: translateX(4px);
 }
 
-/* =========================
-   만족도
-========================= */
+/* ---------- 만족도 ---------- */
 
-.rating-section {
+.rating-card {
     text-align: center;
 }
 
-.rating-section h2 {
-    color: #5b4371;
-}
-
-.rating-character {
-    font-size: 75px;
-    margin: 10px 0;
-}
-
-.rating-message {
-    color: #8b6b9e;
-    font-size: 17px;
-    line-height: 1.6;
+.rating-card h2 {
+    color: #594575;
 }
 
 .rating-number {
-    font-size: 42px;
+    font-size: 48px;
     font-weight: 800;
-    color: #8060aa;
+    color: #8b6bb5;
+    margin: 10px 0;
 }
 
 .stars {
-    font-size: 30px;
-    letter-spacing: 5px;
-    color: #f5b83d;
+    font-size: 34px;
+    letter-spacing: 6px;
+    color: #f6b940;
 }
 
-/* =========================
-   리뷰 작성
-========================= */
+/* ---------- 고양이 ---------- */
 
-.review-section h2 {
-    color: #5b4371;
+.rating-character {
+    font-size: 65px;
+    margin: 15px 0 5px;
 }
 
-.review-section textarea {
+.rating-message {
+    color: #8a72a8;
+    font-size: 17px;
+}
+
+/* ---------- 리뷰 작성 ---------- */
+
+.review-card h2 {
+    color: #594575;
+}
+
+.review-card textarea {
     width: 100%;
-    min-height: 140px;
+    min-height: 150px;
     resize: vertical;
-    border: 2px solid #eadcf2;
-    border-radius: 20px;
+    border: 2px solid #eadcf5;
+    border-radius: 22px;
     padding: 20px;
     font-family: inherit;
     font-size: 16px;
+    color: #51456d;
+    background: #fffaff;
     outline: none;
-    background: #fffafe;
 }
 
-.review-section textarea:focus {
-    border-color: #b99bd5;
+.review-card textarea:focus {
+    border-color: #c7a8e8;
+    box-shadow: 0 0 0 4px rgba(199, 168, 232, 0.15);
 }
 
-.review-stars {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.review-stars span {
-    font-size: 45px;
-    color: #f4bd45;
-    cursor: pointer;
-    margin: 0 3px;
-}
-
-#submitReview {
+.review-button {
     width: 100%;
     border: none;
-    background: #a887ce;
-    color: white;
+    border-radius: 20px;
     padding: 17px;
-    border-radius: 18px;
-    font-size: 17px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #a989d0, #c49ade);
+    color: white;
+    font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 18px;
+    box-shadow: 0 7px 18px rgba(150, 110, 190, 0.2);
+    transition: 0.2s;
 }
 
-#submitReview:hover {
-    background: #9270bb;
+.review-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(150, 110, 190, 0.25);
 }
 
-/* =========================
-   모바일
-========================= */
+/* ---------- 최근 리뷰 ---------- */
+
+.review-item {
+    background: #faf6ff;
+    border-radius: 20px;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    border: 1px solid #eee4f7;
+}
+
+.review-item p {
+    margin: 6px 0;
+}
+
+.review-item .review-star {
+    color: #f6b940;
+}
+
+/* ---------- 반응형 ---------- */
 
 @media (max-width: 700px) {
 
+    header {
+        padding: 25px 20px;
+    }
+
     .header-content {
-        flex-direction: column;
-        text-align: center;
+        gap: 15px;
+    }
+
+    .chef-rabbit {
+        width: 80px;
+        height: 80px;
+        border-radius: 24px;
+        font-size: 45px;
     }
 
     header h1 {
-        font-size: 30px;
+        font-size: 28px;
     }
 
-    .date-control {
-        flex-wrap: wrap;
-        padding: 0 15px;
+    header p {
+        font-size: 15px;
+    }
+
+    main {
+        padding: 25px 15px 60px;
     }
 
     .card {
-        margin: 20px 12px;
-        padding: 25px 20px;
+        padding: 25px 18px;
+        border-radius: 26px;
     }
 
     .meal-content {
@@ -313,6 +319,14 @@ button {
     }
 
     .meal-character {
-        width: auto;
+        min-width: auto;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    #mealList li {
+        font-size: 16px;
     }
 }
