@@ -15,12 +15,13 @@ body {
     color: #554665;
 }
 
+
 /* =========================================
    HEADER
    ========================================= */
 
 header {
-    background: linear-gradient(135deg, #e9dcfa 0%, #f9e3f0 100%);
+    background: linear-gradient(135deg, #e9dcfa, #f9e3f0);
     padding: 32px 20px;
     border-radius: 0 0 35px 35px;
     box-shadow: 0 5px 20px rgba(100, 70, 130, 0.08);
@@ -49,6 +50,7 @@ header p {
     color: #806a91;
 }
 
+
 /* =========================================
    HEADER 토끼
    ========================================= */
@@ -61,17 +63,17 @@ header p {
     justify-content: center;
     align-items: center;
 
-    background: #ffffff;
+    background: white;
     border-radius: 32px;
 
     box-shadow: 0 7px 18px rgba(100, 70, 130, 0.12);
 
-    overflow: hidden;
-    flex-shrink: 0;
-
-    font-size: 65px;
+    font-size: 70px;
     line-height: 1;
+
+    flex-shrink: 0;
 }
+
 
 /* =========================================
    MAIN
@@ -83,6 +85,7 @@ main {
     margin: 35px auto 70px;
 }
 
+
 /* =========================================
    DATE
    ========================================= */
@@ -92,7 +95,6 @@ main {
     justify-content: center;
     align-items: center;
     gap: 12px;
-
     margin-bottom: 30px;
 }
 
@@ -160,6 +162,7 @@ main {
     background: #9271b7;
 }
 
+
 /* =========================================
    CARD
    ========================================= */
@@ -175,6 +178,7 @@ main {
     box-shadow: 0 7px 25px rgba(100, 70, 130, 0.07);
 }
 
+
 /* =========================================
    SECTION TITLE
    ========================================= */
@@ -183,7 +187,6 @@ main {
     display: flex;
     align-items: center;
     gap: 10px;
-
     margin-bottom: 12px;
 }
 
@@ -199,6 +202,7 @@ main {
     font-weight: 800;
 }
 
+
 /* =========================================
    DATE TEXT
    ========================================= */
@@ -210,21 +214,25 @@ main {
     font-size: 15px;
 }
 
+
 /* =========================================
-   MEAL
+   MEAL CONTENT
    ========================================= */
 
 .meal-content {
     display: flex;
     align-items: center;
-    gap: 35px;
+    gap: 30px;
 }
 
-/* 급식 토끼 */
+
+/* =========================================
+   급식 토끼
+   ========================================= */
 
 .meal-character {
-    width: 155px;
-    min-width: 155px;
+    width: 150px;
+    min-width: 150px;
 
     display: flex;
     flex-direction: column;
@@ -238,12 +246,22 @@ main {
     font-weight: 600;
 }
 
-/*
-   이모지를 캐릭터처럼 깔끔하게 표시
-*/
+.rabbit-face {
+    width: 105px;
+    height: 105px;
 
-.meal-character::first-line {
-    font-size: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff9fd;
+
+    border: 3px solid #f0dff0;
+    border-radius: 50%;
+
+    font-size: 70px;
+
+    box-shadow: 0 5px 15px rgba(130, 90, 150, 0.08);
 }
 
 .meal-character > span {
@@ -251,37 +269,71 @@ main {
     margin-top: 10px;
 }
 
+
 /* =========================================
-   MEAL LIST
+   중식 / 석식 2열
    ========================================= */
 
-#mealList {
+.meal-columns {
     flex: 1;
 
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================
+   각각의 급식 상자
+   ========================================= */
+
+.meal-box {
+    background: #fcf9ff;
+
+    border: 2px solid #eee4f6;
+    border-radius: 22px;
+
+    padding: 20px;
+
+    min-width: 0;
+}
+
+.meal-box h3 {
+    margin: 0 0 15px;
+
+    text-align: center;
+
+    color: #6d5085;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.meal-box ul {
     margin: 0;
     padding: 0;
 
     list-style: none;
 }
 
-#mealList li {
-    padding: 14px 18px;
-    margin-bottom: 10px;
+.meal-box li {
+    padding: 10px 12px;
+    margin-bottom: 8px;
 
-    background: #faf6ff;
-    border: 1px solid #eee4f6;
-    border-radius: 17px;
+    background: white;
+
+    border-radius: 13px;
 
     color: #5b4b69;
-    font-size: 17px;
+    font-size: 14px;
 
-    transition: 0.2s;
+    box-shadow: 0 2px 7px rgba(100, 70, 130, 0.04);
 }
 
-#mealList li:hover {
-    background: #f5edfc;
-    transform: translateX(4px);
+.meal-box li:last-child {
+    margin-bottom: 0;
 }
+
 
 /* =========================================
    RATING
@@ -296,7 +348,10 @@ main {
     padding-top: 10px;
 }
 
-/* 고양이 */
+
+/* =========================================
+   고양이
+   ========================================= */
 
 .cat-character {
     width: 190px;
@@ -310,21 +365,31 @@ main {
     line-height: 1.6;
 }
 
+.cat-face {
+    width: 120px;
+    height: 120px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fffaf5;
+
+    border: 3px solid #f3e5d7;
+    border-radius: 50%;
+
+    font-size: 78px;
+
+    box-shadow: 0 5px 15px rgba(150, 110, 80, 0.08);
+}
+
 .cat-character > span {
     display: block;
     margin-top: 10px;
 }
 
-/* 고양이 이모지 */
-.cat-character {
-    font-size: 72px;
-    line-height: 1.2;
-}
-
-/* 글씨만 다시 작게 */
-.cat-character span {
-    font-size: 16px;
-}
 
 /* =========================================
    RATING RESULT
@@ -353,6 +418,7 @@ main {
     font-size: 14px;
 }
 
+
 /* =========================================
    REVIEW WRITE
    ========================================= */
@@ -365,7 +431,6 @@ main {
 .rating-input {
     display: flex;
     gap: 4px;
-
     margin-bottom: 18px;
 }
 
@@ -440,6 +505,7 @@ main {
     box-shadow: 0 6px 15px rgba(130, 90, 160, 0.18);
 }
 
+
 /* =========================================
    RECENT REVIEW
    ========================================= */
@@ -458,6 +524,15 @@ main {
     border-radius: 17px;
 }
 
+.review-stars {
+    color: #f3b64b;
+    font-size: 18px;
+}
+
+.review-item p {
+    margin: 7px 0 0;
+}
+
 .empty-message {
     padding: 20px;
 
@@ -465,6 +540,7 @@ main {
 
     color: #a294ac;
 }
+
 
 /* =========================================
    FOOTER
@@ -479,11 +555,12 @@ footer {
     font-size: 13px;
 }
 
+
 /* =========================================
    MOBILE
    ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 
     header {
         padding: 25px 15px;
@@ -498,7 +575,7 @@ footer {
     .chef-rabbit {
         width: 90px;
         height: 90px;
-        font-size: 55px;
+        font-size: 58px;
     }
 
     header h1 {
@@ -527,7 +604,7 @@ footer {
         width: 100%;
     }
 
-    #mealList {
+    .meal-columns {
         width: 100%;
     }
 
@@ -543,5 +620,29 @@ footer {
 
     .section-title h2 {
         font-size: 22px;
+    }
+}
+
+
+/* =========================================
+   작은 휴대폰
+   ========================================= */
+
+@media (max-width: 520px) {
+
+    .meal-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .date-section {
+        gap: 7px;
+    }
+
+    #mealDate {
+        width: 170px;
+    }
+
+    .date-section button {
+        padding: 0 12px;
     }
 }
