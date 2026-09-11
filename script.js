@@ -3,9 +3,18 @@
 // NEIS 급식 API + 리뷰 기능
 // ================================
 
-// ★ 여기 두 값만 입력하면 됩니다.
+
+// ================================
+// NEIS API 설정
+// ================================
+
+// ★ 네가 발급받은 API 인증키 입력
 const NEIS_API_KEY = "2d789f2727b54cec84c5c4f436b8f314";
-const ATPT_OFCDC_SC_CODE = "C10"; // 부산광역시교육청
+
+// 부산광역시교육청
+const ATPT_OFCDC_SC_CODE = "C10";
+
+// ★ 학산여고의 행정표준코드 입력
 const SD_SCHUL_CODE = "7150158";
 
 
@@ -28,25 +37,44 @@ let reviews = [
 
 
 // ================================
-// 날짜
+// 날짜 설정
 // ================================
 
-const mealDate = document.getElementById("mealDate");
-const mealDateText = document.getElementById("mealDateText");
-const mealList = document.getElementById("mealList");
+const mealDate =
+    document.getElementById("mealDate");
+
+const mealDateText =
+    document.getElementById("mealDateText");
+
+const mealList =
+    document.getElementById("mealList");
 
 const today = new Date();
 
+
 function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
+
+    const day =
+        String(date.getDate())
+            .padStart(2, "0");
 
     return `${year}-${month}-${day}`;
 }
 
-mealDate.value = formatDate(today);
-mealDateText.textContent = `${formatDate(today)} 급식`;
+
+// 처음 사이트에 들어왔을 때 오늘 날짜
+mealDate.value =
+    formatDate(today);
+
+mealDateText.textContent =
+    `${formatDate(today)} 급식`;
 
 
 // ================================
@@ -55,19 +83,27 @@ mealDateText.textContent = `${formatDate(today)} 급식`;
 
 async function loadMeal() {
 
-    const selectedDate = mealDate.value;
+    const selectedDate =
+        mealDate.value;
 
     if (!selectedDate) {
         return;
     }
 
-    const apiDate = selectedDate.replaceAll("-", "");
+
+    // YYYY-MM-DD → YYYYMMDD
+    const apiDate =
+        selectedDate.replaceAll("-", "");
+
 
     mealList.innerHTML = `
         <li>🍚 급식 정보를 불러오는 중이에요...</li>
     `;
 
-    mealDateText.textContent = `${selectedDate} 급식`;
+
+    mealDateText.textContent =
+        `${selectedDate} 급식`;
+
 
     const url =
         "https://open.neis.go.kr/hub/mealServiceDietInfo" +
@@ -79,17 +115,44 @@ async function loadMeal() {
         `&SD_SCHUL_CODE=${SD_SCHUL_CODE}` +
         `&MLSV_YMD=${apiDate}`;
 
+
     try {
 
-        const response = await fetch(url);
+        const response =
+            await fetch(url);
+
 
         if (!response.ok) {
             throw new Error("API 요청 실패");
         }
 
-        const data = await response.json();
 
-        // 급식 정보가 없는 날
+        const data =
+            await response.json();
+
+
+        // ================================
+        // API 오류 확인
+        // ================================
+
+        if (data.RESULT) {
+
+            mealList.innerHTML = `
+                <li>
+                    😥 급식 정보를 불러오지 못했어요.
+                    <br><br>
+                    ${data.RESULT.MESSAGE}
+                </li>
+            `;
+
+            return;
+        }
+
+
+        // ================================
+        // 급식 데이터 확인
+        // ================================
+
         if (
             !data.mealServiceDietInfo ||
             !data.mealServiceDietInfo[1] ||
@@ -97,43 +160,93 @@ async function loadMeal() {
         ) {
 
             mealList.innerHTML = `
-                <li>🥺 이 날짜에는 등록된 급식 정보가 없어요.</li>
+                <li>
+                    🥺 이 날짜에는 등록된 급식 정보가 없어요.
+                </li>
             `;
 
             return;
         }
 
+
         const meals =
             data.mealServiceDietInfo[1].row;
 
+
         mealList.innerHTML = "";
 
-        meals.forEach(function(meal) {
 
-            // DDISH_NM = 메뉴 이름
-            const menuText = meal.DDISH_NM;
+        // ================================
+        // 중식 / 석식 구분
+        // ================================
 
-            // <br/> 기준으로 메뉴 분리
-            const menus = menuText
-                .split("<br/>")
-                .map(menu => menu.trim())
-                .filter(menu => menu !== "");
+        const lunchMeals =
+            meals.filter(function(meal) {
 
-            menus.forEach(function(menu) {
+                return meal.MMEAL_SC_CODE === "2";
 
-                // 알레르기 번호 제거
-                const cleanMenu =
-                    menu.replace(/\([0-9.]+\)/g, "");
-
-                const li =
-                    document.createElement("li");
-
-                li.textContent = "🍴 " + cleanMenu;
-
-                mealList.appendChild(li);
             });
 
-        });
+
+        const dinnerMeals =
+            meals.filter(function(meal) {
+
+                return meal.MMEAL_SC_CODE === "3";
+
+            });
+
+
+        // ================================
+        // 중식 표시
+        // ================================
+
+        if (lunchMeals.length > 0) {
+
+            createMealTitle("🍚 중식");
+
+            lunchMeals.forEach(function(meal) {
+
+                showMealMenu(meal);
+
+            });
+
+        }
+
+
+        // ================================
+        // 석식 표시
+        // ================================
+
+        if (dinnerMeals.length > 0) {
+
+            createMealTitle("🌙 석식");
+
+            dinnerMeals.forEach(function(meal) {
+
+                showMealMenu(meal);
+
+            });
+
+        }
+
+
+        // ================================
+        // 중식/석식 모두 없는 경우
+        // ================================
+
+        if (
+            lunchMeals.length === 0 &&
+            dinnerMeals.length === 0
+        ) {
+
+            mealList.innerHTML = `
+                <li>
+                    🥺 표시할 급식 정보가 없어요.
+                </li>
+            `;
+
+        }
+
 
     } catch (error) {
 
@@ -142,16 +255,86 @@ async function loadMeal() {
         mealList.innerHTML = `
             <li>
                 😥 급식 정보를 불러오지 못했어요.
-                <br>
+                <br><br>
                 API 키와 학교 코드를 확인해주세요.
             </li>
         `;
+
     }
+
 }
 
 
 // ================================
-// 급식 보기
+// 급식 구분 제목 만들기
+// ================================
+
+function createMealTitle(title) {
+
+    const titleLi =
+        document.createElement("li");
+
+    titleLi.className =
+        "meal-type-title";
+
+    titleLi.textContent =
+        title;
+
+    mealList.appendChild(titleLi);
+
+}
+
+
+// ================================
+// 급식 메뉴 표시
+// ================================
+
+function showMealMenu(meal) {
+
+    const menuText =
+        meal.DDISH_NM;
+
+
+    // <br/>로 메뉴 분리
+    const menus =
+        menuText
+            .split("<br/>")
+            .map(function(menu) {
+
+                return menu.trim();
+
+            })
+            .filter(function(menu) {
+
+                return menu !== "";
+
+            });
+
+
+    menus.forEach(function(menu) {
+
+        // 알레르기 번호 제거
+        const cleanMenu =
+            menu.replace(/\([0-9.]+\)/g, "");
+
+
+        const li =
+            document.createElement("li");
+
+
+        li.textContent =
+            "🍴 " + cleanMenu;
+
+
+        mealList.appendChild(li);
+
+    });
+
+}
+
+
+// ================================
+// 급식 보기 버튼
 // ================================
 
 document
@@ -164,7 +347,7 @@ document
 
 
 // ================================
-// 날짜 이동
+// 이전 날짜
 // ================================
 
 document
@@ -174,7 +357,9 @@ document
         const date =
             new Date(mealDate.value);
 
-        date.setDate(date.getDate() - 1);
+        date.setDate(
+            date.getDate() - 1
+        );
 
         mealDate.value =
             formatDate(date);
@@ -183,6 +368,10 @@ document
 
     });
 
+
+// ================================
+// 다음 날짜
+// ================================
 
 document
     .getElementById("nextDay")
@@ -191,7 +380,9 @@ document
         const date =
             new Date(mealDate.value);
 
-        date.setDate(date.getDate() + 1);
+        date.setDate(
+            date.getDate() + 1
+        );
 
         mealDate.value =
             formatDate(date);
@@ -202,33 +393,42 @@ document
 
 
 // ================================
-// 날짜 직접 변경
+// 날짜 직접 선택
 // ================================
 
-mealDate.addEventListener("change", function() {
+mealDate.addEventListener(
+    "change",
+    function() {
 
-    loadMeal();
+        loadMeal();
 
-});
+    }
+);
 
 
 // ================================
-// 별점
+// 별점 선택
 // ================================
 
 const starButtons =
     document.querySelectorAll(".star-btn");
 
+
 starButtons.forEach(function(button) {
 
-    button.addEventListener("click", function() {
+    button.addEventListener(
+        "click",
+        function() {
 
-        selectedRating =
-            Number(button.dataset.rating);
+            selectedRating =
+                Number(
+                    button.dataset.rating
+                );
 
-        updateStarButtons();
+            updateStarButtons();
 
-    });
+        }
+    );
 
 });
 
@@ -238,12 +438,20 @@ function updateStarButtons() {
     starButtons.forEach(function(button) {
 
         const rating =
-            Number(button.dataset.rating);
+            Number(
+                button.dataset.rating
+            );
 
-        button.textContent =
-            rating <= selectedRating
-                ? "★"
-                : "☆";
+
+        if (rating <= selectedRating) {
+
+            button.textContent = "★";
+
+        } else {
+
+            button.textContent = "☆";
+
+        }
 
     });
 
@@ -263,43 +471,62 @@ const reviewList =
 
 document
     .getElementById("submitReview")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        const text =
-            reviewText.value.trim();
+            const text =
+                reviewText.value.trim();
 
-        if (selectedRating === 0) {
 
-            alert("별점을 먼저 선택해주세요! ⭐");
+            if (selectedRating === 0) {
 
-            return;
+                alert(
+                    "별점을 먼저 선택해주세요! ⭐"
+                );
+
+                return;
+            }
+
+
+            if (text === "") {
+
+                alert(
+                    "리뷰 내용을 입력해주세요! 💬"
+                );
+
+                return;
+            }
+
+
+            const newReview = {
+
+                rating:
+                    selectedRating,
+
+                text:
+                    text
+
+            };
+
+
+            reviews.unshift(
+                newReview
+            );
+
+
+            reviewText.value = "";
+
+            selectedRating = 0;
+
+            updateStarButtons();
+
+            displayReviews();
+
+            updateAverageRating();
+
         }
-
-        if (text === "") {
-
-            alert("리뷰 내용을 입력해주세요! 💬");
-
-            return;
-        }
-
-        const newReview = {
-            rating: selectedRating,
-            text: text
-        };
-
-        reviews.unshift(newReview);
-
-        reviewText.value = "";
-
-        selectedRating = 0;
-
-        updateStarButtons();
-
-        displayReviews();
-
-        updateAverageRating();
-
-    });
+    );
 
 
 // ================================
@@ -310,32 +537,47 @@ function displayReviews() {
 
     reviewList.innerHTML = "";
 
+
     if (reviews.length === 0) {
 
         reviewList.innerHTML =
-            '<p class="empty-message">아직 작성된 리뷰가 없어요 🥺</p>';
+            `
+            <p class="empty-message">
+                아직 작성된 리뷰가 없어요 🥺
+            </p>
+            `;
 
         return;
     }
+
 
     reviews.forEach(function(review) {
 
         const item =
             document.createElement("div");
 
-        item.className = "review-item";
+
+        item.className =
+            "review-item";
+
 
         const stars =
             "★".repeat(review.rating) +
-            "☆".repeat(5 - review.rating);
+            "☆".repeat(
+                5 - review.rating
+            );
+
 
         item.innerHTML = `
             <div class="review-stars">
                 ${stars}
             </div>
 
-            <p>${review.text}</p>
+            <p>
+                ${review.text}
+            </p>
         `;
+
 
         reviewList.appendChild(item);
 
@@ -351,27 +593,38 @@ function displayReviews() {
 function updateAverageRating() {
 
     const averageRating =
-        document.getElementById("averageRating");
+        document.getElementById(
+            "averageRating"
+        );
 
     const averageStars =
-        document.getElementById("averageStars");
+        document.getElementById(
+            "averageStars"
+        );
 
     const reviewCount =
-        document.getElementById("reviewCount");
+        document.getElementById(
+            "reviewCount"
+        );
+
 
     if (reviews.length === 0) {
 
-        averageRating.textContent = "0.0";
+        averageRating.textContent =
+            "0.0";
 
         averageStars.textContent =
             "☆☆☆☆☆";
 
-        reviewCount.textContent = "0";
+        reviewCount.textContent =
+            "0";
 
         return;
     }
 
+
     let total = 0;
+
 
     reviews.forEach(function(review) {
 
@@ -379,18 +632,25 @@ function updateAverageRating() {
 
     });
 
+
     const average =
         total / reviews.length;
+
 
     averageRating.textContent =
         average.toFixed(1);
 
+
     const rounded =
         Math.round(average);
 
+
     averageStars.textContent =
         "★".repeat(rounded) +
-        "☆".repeat(5 - rounded);
+        "☆".repeat(
+            5 - rounded
+        );
+
 
     reviewCount.textContent =
         reviews.length;
@@ -399,7 +659,7 @@ function updateAverageRating() {
 
 
 // ================================
-// 처음 실행
+// 처음 화면
 // ================================
 
 displayReviews();
