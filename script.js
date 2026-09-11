@@ -1,26 +1,25 @@
-// ================================
+// ========================================
 // 학산급식리뷰
-// NEIS 급식 API + 리뷰 기능
-// ================================
+// 급식 API + 별점 + 리뷰
+// ========================================
 
 
-// ================================
+// ========================================
 // NEIS API 설정
-// ================================
+// ========================================
 
-// ★ 네가 발급받은 API 인증키 입력
+// ⚠️ 여기 두 곳만 네 정보로 바꾸면 됨!
+
 const NEIS_API_KEY = "2d789f2727b54cec84c5c4f436b8f314";
 
-// 부산광역시교육청
 const ATPT_OFCDC_SC_CODE = "C10";
 
-// ★ 학산여고의 행정표준코드 입력
 const SD_SCHUL_CODE = "7150158";
 
 
-// ================================
+// ========================================
 // 리뷰 데이터
-// ================================
+// ========================================
 
 let selectedRating = 0;
 
@@ -36,9 +35,9 @@ let reviews = [
 ];
 
 
-// ================================
-// 날짜 설정
-// ================================
+// ========================================
+// HTML 요소 가져오기
+// ========================================
 
 const mealDate =
     document.getElementById("mealDate");
@@ -46,8 +45,25 @@ const mealDate =
 const mealDateText =
     document.getElementById("mealDateText");
 
-const mealList =
-    document.getElementById("mealList");
+const lunchList =
+    document.getElementById("lunchList");
+
+const dinnerList =
+    document.getElementById("dinnerList");
+
+const reviewText =
+    document.getElementById("reviewText");
+
+const reviewList =
+    document.getElementById("reviewList");
+
+const starButtons =
+    document.querySelectorAll(".star-btn");
+
+
+// ========================================
+// 날짜
+// ========================================
 
 const today = new Date();
 
@@ -69,7 +85,7 @@ function formatDate(date) {
 }
 
 
-// 처음 사이트에 들어왔을 때 오늘 날짜
+// 처음 접속했을 때 오늘 날짜
 mealDate.value =
     formatDate(today);
 
@@ -77,18 +93,31 @@ mealDateText.textContent =
     `${formatDate(today)} 급식`;
 
 
-// ================================
-// NEIS 급식 API
-// ================================
+// ========================================
+// 급식 불러오기
+// ========================================
 
 async function loadMeal() {
 
     const selectedDate =
         mealDate.value;
 
+
     if (!selectedDate) {
         return;
     }
+
+
+    // 화면 초기화
+    lunchList.innerHTML =
+        "<li>🍚 불러오는 중...</li>";
+
+    dinnerList.innerHTML =
+        "<li>🌙 불러오는 중...</li>";
+
+
+    mealDateText.textContent =
+        `${selectedDate} 급식`;
 
 
     // YYYY-MM-DD → YYYYMMDD
@@ -96,15 +125,7 @@ async function loadMeal() {
         selectedDate.replaceAll("-", "");
 
 
-    mealList.innerHTML = `
-        <li>🍚 급식 정보를 불러오는 중이에요...</li>
-    `;
-
-
-    mealDateText.textContent =
-        `${selectedDate} 급식`;
-
-
+    // NEIS API 주소
     const url =
         "https://open.neis.go.kr/hub/mealServiceDietInfo" +
         `?KEY=${NEIS_API_KEY}` +
@@ -131,27 +152,23 @@ async function loadMeal() {
             await response.json();
 
 
-        // ================================
-        // API 오류 확인
-        // ================================
+        // ========================================
+        // API 오류
+        // ========================================
 
         if (data.RESULT) {
 
-            mealList.innerHTML = `
-                <li>
-                    😥 급식 정보를 불러오지 못했어요.
-                    <br><br>
-                    ${data.RESULT.MESSAGE}
-                </li>
-            `;
+            showMealError(
+                data.RESULT.MESSAGE
+            );
 
             return;
         }
 
 
-        // ================================
+        // ========================================
         // 급식 데이터 확인
-        // ================================
+        // ========================================
 
         if (
             !data.mealServiceDietInfo ||
@@ -159,11 +176,7 @@ async function loadMeal() {
             !data.mealServiceDietInfo[1].row
         ) {
 
-            mealList.innerHTML = `
-                <li>
-                    🥺 이 날짜에는 등록된 급식 정보가 없어요.
-                </li>
-            `;
+            showNoMeal();
 
             return;
         }
@@ -173,12 +186,9 @@ async function loadMeal() {
             data.mealServiceDietInfo[1].row;
 
 
-        mealList.innerHTML = "";
-
-
-        // ================================
-        // 중식 / 석식 구분
-        // ================================
+        // ========================================
+        // 중식 / 석식 분리
+        // ========================================
 
         const lunchMeals =
             meals.filter(function(meal) {
@@ -196,54 +206,52 @@ async function loadMeal() {
             });
 
 
-        // ================================
+        // ========================================
         // 중식 표시
-        // ================================
+        // ========================================
 
         if (lunchMeals.length > 0) {
 
-            createMealTitle("🍚 중식");
+            lunchList.innerHTML = "";
 
             lunchMeals.forEach(function(meal) {
 
-                showMealMenu(meal);
+                addMenus(
+                    lunchList,
+                    meal.DDISH_NM
+                );
 
             });
+
+        } else {
+
+            lunchList.innerHTML =
+                "<li>🥺 중식 정보가 없어요.</li>";
 
         }
 
 
-        // ================================
+        // ========================================
         // 석식 표시
-        // ================================
+        // ========================================
 
         if (dinnerMeals.length > 0) {
 
-            createMealTitle("🌙 석식");
+            dinnerList.innerHTML = "";
 
             dinnerMeals.forEach(function(meal) {
 
-                showMealMenu(meal);
+                addMenus(
+                    dinnerList,
+                    meal.DDISH_NM
+                );
 
             });
 
-        }
+        } else {
 
-
-        // ================================
-        // 중식/석식 모두 없는 경우
-        // ================================
-
-        if (
-            lunchMeals.length === 0 &&
-            dinnerMeals.length === 0
-        ) {
-
-            mealList.innerHTML = `
-                <li>
-                    🥺 표시할 급식 정보가 없어요.
-                </li>
-            `;
+            dinnerList.innerHTML =
+                "<li>🥺 석식 정보가 없어요.</li>";
 
         }
 
@@ -252,50 +260,21 @@ async function loadMeal() {
 
         console.error(error);
 
-        mealList.innerHTML = `
-            <li>
-                😥 급식 정보를 불러오지 못했어요.
-                <br><br>
-                API 키와 학교 코드를 확인해주세요.
-            </li>
-        `;
+        showMealError(
+            "급식 정보를 불러오지 못했어요."
+        );
 
     }
 
 }
 
 
-// ================================
-// 급식 구분 제목 만들기
-// ================================
+// ========================================
+// 메뉴 표시
+// ========================================
 
-function createMealTitle(title) {
+function addMenus(list, menuText) {
 
-    const titleLi =
-        document.createElement("li");
-
-    titleLi.className =
-        "meal-type-title";
-
-    titleLi.textContent =
-        title;
-
-    mealList.appendChild(titleLi);
-
-}
-
-
-// ================================
-// 급식 메뉴 표시
-// ================================
-
-function showMealMenu(meal) {
-
-    const menuText =
-        meal.DDISH_NM;
-
-
-    // <br/>로 메뉴 분리
     const menus =
         menuText
             .split("<br/>")
@@ -326,75 +305,120 @@ function showMealMenu(meal) {
             "🍴 " + cleanMenu;
 
 
-        mealList.appendChild(li);
+        list.appendChild(li);
 
     });
 
 }
 
 
-// ================================
+// ========================================
+// 급식 없음
+// ========================================
+
+function showNoMeal() {
+
+    lunchList.innerHTML =
+        "<li>🥺 이 날짜에는 급식 정보가 없어요.</li>";
+
+    dinnerList.innerHTML =
+        "<li>🥺 이 날짜에는 급식 정보가 없어요.</li>";
+
+}
+
+
+// ========================================
+// API 오류 표시
+// ========================================
+
+function showMealError(message) {
+
+    lunchList.innerHTML =
+        `<li>😥 ${message}</li>`;
+
+    dinnerList.innerHTML =
+        `<li>😥 ${message}</li>`;
+
+}
+
+
+// ========================================
 // 급식 보기 버튼
-// ================================
+// ========================================
 
 document
     .getElementById("searchBtn")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        loadMeal();
+            loadMeal();
 
-    });
+        }
+    );
 
 
-// ================================
+// ========================================
 // 이전 날짜
-// ================================
+// ========================================
 
 document
     .getElementById("prevDay")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        const date =
-            new Date(mealDate.value);
-
-        date.setDate(
-            date.getDate() - 1
-        );
-
-        mealDate.value =
-            formatDate(date);
-
-        loadMeal();
-
-    });
+            const date =
+                new Date(mealDate.value);
 
 
-// ================================
+            date.setDate(
+                date.getDate() - 1
+            );
+
+
+            mealDate.value =
+                formatDate(date);
+
+
+            loadMeal();
+
+        }
+    );
+
+
+// ========================================
 // 다음 날짜
-// ================================
+// ========================================
 
 document
     .getElementById("nextDay")
-    .addEventListener("click", function() {
+    .addEventListener(
+        "click",
+        function() {
 
-        const date =
-            new Date(mealDate.value);
-
-        date.setDate(
-            date.getDate() + 1
-        );
-
-        mealDate.value =
-            formatDate(date);
-
-        loadMeal();
-
-    });
+            const date =
+                new Date(mealDate.value);
 
 
-// ================================
+            date.setDate(
+                date.getDate() + 1
+            );
+
+
+            mealDate.value =
+                formatDate(date);
+
+
+            loadMeal();
+
+        }
+    );
+
+
+// ========================================
 // 날짜 직접 선택
-// ================================
+// ========================================
 
 mealDate.addEventListener(
     "change",
@@ -406,13 +430,9 @@ mealDate.addEventListener(
 );
 
 
-// ================================
+// ========================================
 // 별점 선택
-// ================================
-
-const starButtons =
-    document.querySelectorAll(".star-btn");
-
+// ========================================
 
 starButtons.forEach(function(button) {
 
@@ -424,6 +444,7 @@ starButtons.forEach(function(button) {
                 Number(
                     button.dataset.rating
                 );
+
 
             updateStarButtons();
 
@@ -458,16 +479,9 @@ function updateStarButtons() {
 }
 
 
-// ================================
+// ========================================
 // 리뷰 등록
-// ================================
-
-const reviewText =
-    document.getElementById("reviewText");
-
-const reviewList =
-    document.getElementById("reviewList");
-
+// ========================================
 
 document
     .getElementById("submitReview")
@@ -479,6 +493,7 @@ document
                 reviewText.value.trim();
 
 
+            // 별점 확인
             if (selectedRating === 0) {
 
                 alert(
@@ -489,6 +504,7 @@ document
             }
 
 
+            // 리뷰 내용 확인
             if (text === "") {
 
                 alert(
@@ -499,6 +515,7 @@ document
             }
 
 
+            // 리뷰 추가
             const newReview = {
 
                 rating:
@@ -515,6 +532,7 @@ document
             );
 
 
+            // 초기화
             reviewText.value = "";
 
             selectedRating = 0;
@@ -529,9 +547,9 @@ document
     );
 
 
-// ================================
+// ========================================
 // 리뷰 표시
-// ================================
+// ========================================
 
 function displayReviews() {
 
@@ -568,7 +586,8 @@ function displayReviews() {
             );
 
 
-        item.innerHTML = `
+        item.innerHTML =
+            `
             <div class="review-stars">
                 ${stars}
             </div>
@@ -576,7 +595,7 @@ function displayReviews() {
             <p>
                 ${review.text}
             </p>
-        `;
+            `;
 
 
         reviewList.appendChild(item);
@@ -586,9 +605,9 @@ function displayReviews() {
 }
 
 
-// ================================
+// ========================================
 // 평균 별점
-// ================================
+// ========================================
 
 function updateAverageRating() {
 
@@ -658,9 +677,9 @@ function updateAverageRating() {
 }
 
 
-// ================================
-// 처음 화면
-// ================================
+// ========================================
+// 처음 실행
+// ========================================
 
 displayReviews();
 
