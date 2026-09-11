@@ -25,6 +25,7 @@ header {
     width: 90%;
     max-width: 1100px;
     margin: auto;
+
     display: flex;
     align-items: center;
     gap: 24px;
@@ -45,7 +46,7 @@ header p {
 
 
 /* =========================
-   토끼
+   HEADER 토끼
 ========================= */
 
 .chef-rabbit {
@@ -54,82 +55,154 @@ header p {
     flex-shrink: 0;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     background: #fff;
     border-radius: 32px;
+
     box-shadow: 0 7px 18px rgba(100,70,130,.12);
 }
 
-.rabbit-face {
+.rabbit-art {
     position: relative;
-    width: 72px;
-    height: 62px;
-    background: #fff;
-    border: 3px solid #eadbea;
-    border-radius: 50%;
+    width: 75px;
+    height: 80px;
 }
 
-/* 귀 */
-.rabbit-face::before,
-.rabbit-face::after {
+/* 요리사 모자 */
+
+.chef-hat {
+    position: absolute;
+    z-index: 5;
+
+    top: 0;
+    left: 17px;
+
+    width: 42px;
+    height: 25px;
+
+    background: #fff;
+    border: 2px solid #eadbea;
+    border-radius: 50%;
+    
+    font-size: 0;
+}
+
+.chef-hat::after {
     content: "";
     position: absolute;
-    width: 20px;
-    height: 38px;
+
+    left: -4px;
+    bottom: -7px;
+
+    width: 46px;
+    height: 10px;
+
+    background: #fff;
+    border: 2px solid #eadbea;
+    border-radius: 8px;
+}
+
+/* 토끼 귀 */
+
+.rabbit-ears {
+    position: absolute;
+    left: 0;
+    top: 15px;
+
+    width: 75px;
+    height: 50px;
+}
+
+.rabbit-ears i {
+    position: absolute;
+
+    width: 22px;
+    height: 43px;
+
     background: #fff;
     border: 3px solid #eadbea;
     border-radius: 50%;
-    top: -30px;
 }
 
-.rabbit-face::before {
+.rabbit-ears i:first-child {
     left: 9px;
-    transform: rotate(-7deg);
+    transform: rotate(-8deg);
 }
 
-.rabbit-face::after {
+.rabbit-ears i:last-child {
     right: 9px;
-    transform: rotate(7deg);
+    transform: rotate(8deg);
 }
 
-/* 토끼 눈 */
-.rabbit-eye {
+/* 토끼 얼굴 */
+
+.rabbit-head {
     position: absolute;
-    width: 11px;
-    height: 14px;
+
+    left: 5px;
+    bottom: 0;
+
+    width: 65px;
+    height: 55px;
+
+    background: #fff;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+}
+
+/* 눈 */
+
+.rabbit-head span {
+    display: block;
+
+    width: 8px;
+    height: 11px;
+
+    color: #5b4b69;
+    font-size: 0;
+
     background: #5b4b69;
     border-radius: 50%;
-    top: 23px;
+
+    position: relative;
 }
 
-.rabbit-eye.left {
-    left: 17px;
-}
-
-.rabbit-eye.right {
-    right: 17px;
-}
-
-.rabbit-eye::after {
+.rabbit-head span::after {
     content: "";
+
     position: absolute;
+
     width: 4px;
-    height: 5px;
-    background: white;
+    height: 4px;
+
+    background: #fff;
     border-radius: 50%;
+
     top: 2px;
     left: 2px;
 }
 
-.rabbit-mouth {
+/* 입 */
+
+.rabbit-head b {
     position: absolute;
+
+    bottom: 9px;
     left: 50%;
-    bottom: 11px;
+
     transform: translateX(-50%);
+
     color: #c7839d;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 
@@ -140,6 +213,7 @@ header p {
 main {
     width: 90%;
     max-width: 1100px;
+
     margin: 35px auto 70px;
 }
 
@@ -152,6 +226,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 12px;
     margin-bottom: 30px;
 }
@@ -162,16 +237,25 @@ main {
     gap: 8px;
 }
 
+.date-section > div span {
+    font-size: 23px;
+}
+
 .date-section button {
     height: 48px;
     padding: 0 18px;
+
     border: none;
     border-radius: 15px;
-    background: white;
+
+    background: #fff;
     color: #75598e;
+
     font-size: 18px;
     font-weight: 700;
+
     box-shadow: 0 4px 12px rgba(100,70,130,.08);
+
     cursor: pointer;
 }
 
@@ -181,12 +265,17 @@ main {
 
 #mealDate {
     height: 48px;
+
     padding: 0 15px;
+
     border: 2px solid #dfcff0;
     border-radius: 15px;
+
     background: white;
     color: #60477a;
+
     font-family: inherit;
+    font-size: 15px;
 }
 
 #searchBtn {
@@ -196,20 +285,29 @@ main {
 
 
 /* =========================
-   카드
+   CARD
 ========================= */
 
 .card {
     background: white;
+
     padding: 32px;
     margin-bottom: 25px;
+
     border-radius: 28px;
+
     box-shadow: 0 7px 25px rgba(100,70,130,.07);
 }
+
+
+/* =========================
+   제목
+========================= */
 
 .section-title {
     display: flex;
     align-items: center;
+
     gap: 10px;
     margin-bottom: 12px;
 }
@@ -220,6 +318,7 @@ main {
 
 .section-title h2 {
     margin: 0;
+
     color: #60477a;
     font-size: 25px;
     font-weight: 800;
@@ -238,99 +337,126 @@ main {
 .meal-content {
     display: flex;
     align-items: center;
+
     gap: 30px;
 }
 
 .meal-character {
     width: 150px;
     min-width: 150px;
+
     text-align: center;
+
     color: #806a91;
     font-weight: 600;
 }
 
 
-/* 큰 토끼 얼굴 */
+/* 큰 토끼 */
 
-.big-rabbit {
+.meal-rabbit {
     position: relative;
-    width: 110px;
-    height: 95px;
+
+    width: 115px;
+    height: 110px;
+
     margin: 0 auto 10px;
 }
 
-.big-rabbit-face {
-    position: absolute;
-    left: 5px;
-    bottom: 0;
-    width: 100px;
-    height: 78px;
-    background: white;
-    border: 3px solid #eadbea;
-    border-radius: 50%;
-}
-
-
 /* 귀 */
 
-.big-rabbit-ear {
+.meal-rabbit .rabbit-ear {
     position: absolute;
+
     top: 0;
-    width: 28px;
+
+    width: 30px;
     height: 52px;
-    background: white;
+
+    background: #fff;
+
     border: 3px solid #eadbea;
     border-radius: 50%;
 }
 
-.big-rabbit-ear.left {
+.meal-rabbit .rabbit-ear.left {
     left: 18px;
     transform: rotate(-7deg);
 }
 
-.big-rabbit-ear.right {
+.meal-rabbit .rabbit-ear.right {
     right: 18px;
     transform: rotate(7deg);
 }
 
+/* 얼굴 */
+
+.meal-rabbit .rabbit-face {
+    position: absolute;
+
+    left: 7px;
+    bottom: 0;
+
+    width: 101px;
+    height: 80px;
+
+    background: white;
+
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+}
 
 /* 눈 */
 
-.big-rabbit-eye {
-    position: absolute;
-    top: 28px;
-    width: 12px;
-    height: 16px;
+.meal-rabbit .rabbit-face span {
+    display: block;
+
+    width: 11px;
+    height: 15px;
+
+    font-size: 0;
+
     background: #554665;
     border-radius: 50%;
+
+    position: relative;
 }
 
-.big-rabbit-eye.left {
-    left: 25px;
-}
-
-.big-rabbit-eye.right {
-    right: 25px;
-}
-
-.big-rabbit-eye::after {
+.meal-rabbit .rabbit-face span::after {
     content: "";
+
     position: absolute;
+
     width: 5px;
     height: 6px;
+
     background: white;
     border-radius: 50%;
+
     top: 2px;
     left: 2px;
 }
 
-.big-rabbit-mouth {
+/* 입 */
+
+.meal-rabbit .rabbit-face b {
     position: absolute;
+
     left: 50%;
     bottom: 13px;
+
     transform: translateX(-50%);
+
     color: #c7839d;
-    font-size: 17px;
+
+    font-size: 18px;
+    font-weight: normal;
 }
 
 
@@ -340,35 +466,46 @@ main {
 
 .meal-columns {
     flex: 1;
+
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 18px;
 }
 
 .meal-box {
     padding: 20px;
+
     background: #fcf9ff;
+
     border: 2px solid #eee4f6;
     border-radius: 22px;
 }
 
 .meal-box h3 {
     margin: 0 0 15px;
+
     text-align: center;
+
     color: #6d5085;
 }
 
 .meal-box ul {
     margin: 0;
     padding: 0;
+
     list-style: none;
 }
 
 .meal-box li {
     padding: 10px 12px;
     margin-bottom: 8px;
+
     background: white;
+
     border-radius: 13px;
+
     font-size: 14px;
 }
 
@@ -379,122 +516,161 @@ main {
 
 .rating-content {
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     gap: 60px;
 }
 
 .cat-character {
     width: 190px;
+
     text-align: center;
+
     color: #806a91;
     font-weight: 600;
 }
 
 
-/* 고양이 얼굴 */
+/* =========================
+   고양이
+========================= */
 
-.cute-cat {
+.cat-art {
     position: relative;
-    width: 120px;
-    height: 105px;
+
+    width: 125px;
+    height: 110px;
+
     margin: 0 auto 10px;
 }
 
-.cat-face {
+/* 귀 */
+
+.cat-art .cat-ear {
     position: absolute;
-    left: 5px;
-    bottom: 0;
-    width: 110px;
-    height: 82px;
-    background: #fff;
-    border: 3px solid #eadfd7;
-    border-radius: 48%;
-}
 
-
-/* 고양이 귀 - 둥글게 */
-
-.cat-ear {
-    position: absolute;
     top: 3px;
+
     width: 38px;
-    height: 38px;
-    background: white;
+    height: 42px;
+
+    background: #fff;
+
     border: 3px solid #eadfd7;
-    border-radius: 45% 45% 20% 20%;
+
+    border-radius: 50%;
 }
 
-.cat-ear.left {
+.cat-art .cat-ear.left {
     left: 8px;
-    transform: rotate(-18deg);
+
+    transform: rotate(-20deg);
 }
 
-.cat-ear.right {
+.cat-art .cat-ear.right {
     right: 8px;
-    transform: rotate(18deg);
+
+    transform: rotate(20deg);
 }
 
+/* 얼굴 */
 
-/* ✨ 초롱초롱 고양이 눈 */
-
-.cat-eye {
+.cat-head {
     position: absolute;
-    top: 28px;
+
+    left: 6px;
+    bottom: 0;
+
+    width: 113px;
+    height: 85px;
+
+    background: #fff;
+
+    border: 3px solid #eadfd7;
+
+    border-radius: 48%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 24px;
+}
+
+/* 고양이 눈 */
+
+.cat-head span {
+    display: block;
+
     width: 19px;
     height: 25px;
+
+    font-size: 0;
+
     background: #655071;
+
     border-radius: 50%;
+
+    position: relative;
 }
 
-.cat-eye.left {
-    left: 25px;
-}
+/* 큰 반짝임 */
 
-.cat-eye.right {
-    right: 25px;
-}
-
-
-/* 눈 안의 반짝임 */
-
-.cat-eye::before {
+.cat-head span::before {
     content: "";
+
     position: absolute;
+
     width: 8px;
     height: 8px;
+
     background: white;
+
     border-radius: 50%;
+
     top: 3px;
     left: 4px;
 }
 
-.cat-eye::after {
+/* 작은 반짝임 */
+
+.cat-head span::after {
     content: "";
+
     position: absolute;
+
     width: 4px;
     height: 4px;
-    background: white;
-    border-radius: 50%;
-    bottom: 5px;
-    right: 4px;
-}
 
+    background: white;
+
+    border-radius: 50%;
+
+    right: 4px;
+    bottom: 5px;
+}
 
 /* 고양이 입 */
 
-.cat-mouth {
+.cat-head b {
     position: absolute;
+
     left: 50%;
     bottom: 13px;
+
     transform: translateX(-50%);
+
     color: #c08091;
-    font-size: 18px;
+
+    font-size: 19px;
+    font-weight: normal;
 }
 
 
 /* =========================
-   별점
+   별점 결과
 ========================= */
 
 .rating-result {
@@ -503,18 +679,23 @@ main {
 
 #averageRating {
     font-size: 50px;
+
     font-weight: 800;
+
     color: #755492;
 }
 
 .stars {
     color: #f3b64b;
+
     font-size: 30px;
+
     letter-spacing: 3px;
 }
 
 .rating-result p {
     margin: 8px 0;
+
     color: #9a8ca4;
 }
 
@@ -524,54 +705,96 @@ main {
 ========================= */
 
 .guide {
+    margin-bottom: 15px;
+
     color: #8d7b99;
 }
 
 .rating-input {
     display: flex;
+
     gap: 4px;
+
     margin-bottom: 18px;
 }
 
 .star-btn {
     padding: 3px;
+
     border: none;
+
     background: transparent;
+
     color: #f3b64b;
+
     font-size: 38px;
+
     cursor: pointer;
+}
+
+.star-btn:hover {
+    transform: scale(1.1);
 }
 
 #reviewText {
     width: 100%;
+
     min-height: 130px;
+
     padding: 17px;
+
     border: 2px solid #eee3f5;
+
     border-radius: 18px;
+
     background: #fdfaff;
+
     color: #554665;
+
     font-family: inherit;
+
+    font-size: 15px;
+
     resize: vertical;
+
+    outline: none;
+}
+
+#reviewText:focus {
+    border-color: #c4a7dc;
 }
 
 .submit-btn {
     width: 100%;
+
     margin-top: 14px;
+
     padding: 15px;
+
     border: none;
+
     border-radius: 17px;
+
     background: linear-gradient(135deg,#aa8ccc,#bd9dd8);
+
     color: white;
+
     font-size: 17px;
+
     font-weight: 700;
+
     cursor: pointer;
 }
 
 .review-item {
     padding: 17px 20px;
+
     margin-bottom: 10px;
+
     background: #faf6ff;
+
     border: 1px solid #eee4f6;
+
     border-radius: 17px;
 }
 
@@ -581,7 +804,9 @@ main {
 
 .empty-message {
     padding: 20px;
+
     text-align: center;
+
     color: #a294ac;
 }
 
@@ -592,8 +817,11 @@ main {
 
 footer {
     padding: 25px;
+
     text-align: center;
+
     color: #9b8ca7;
+
     font-size: 13px;
 }
 
