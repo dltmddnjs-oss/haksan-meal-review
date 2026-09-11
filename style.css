@@ -1,37 +1,25 @@
-/* =========================================
-   학산급식리뷰
-   Cute & Clean Pastel Design
-   ========================================= */
-
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding: 0;
     font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
     background: #fbf8ff;
     color: #554665;
 }
 
-
-/* =========================================
-   HEADER
-   ========================================= */
-
 header {
     background: linear-gradient(135deg, #e9dcfa, #f9e3f0);
     padding: 32px 20px;
     border-radius: 0 0 35px 35px;
-    box-shadow: 0 5px 20px rgba(100, 70, 130, 0.08);
+    box-shadow: 0 5px 20px rgba(100,70,130,.08);
 }
 
 .header-content {
     width: 90%;
     max-width: 1100px;
-    margin: 0 auto;
-
+    margin: auto;
     display: flex;
     align-items: center;
     gap: 25px;
@@ -40,55 +28,91 @@ header {
 header h1 {
     margin: 0;
     font-size: 40px;
-    font-weight: 800;
     color: #60477a;
 }
 
 header p {
     margin: 8px 0 0;
-    font-size: 18px;
     color: #806a91;
+    font-size: 18px;
 }
 
 
-/* =========================================
-   HEADER 토끼
-   ========================================= */
+/* 요리사 토끼 */
 
 .chef-rabbit {
     width: 105px;
     height: 105px;
+    background: white;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 7px 18px rgba(100,70,130,.12);
+}
 
+.rabbit-art {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.chef-hat {
+    position: absolute;
+    top: -10px;
+    left: 22px;
+    font-size: 38px;
+    color: white;
+    z-index: 3;
+}
+
+.rabbit-ears {
+    display: flex;
+    justify-content: space-around;
+}
+
+.rabbit-ears i {
+    width: 20px;
+    height: 42px;
+    background: white;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+}
+
+.rabbit-head {
+    position: absolute;
+    bottom: 3px;
+    left: 8px;
+    width: 64px;
+    height: 55px;
+    background: white;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 14px;
+}
 
-    background: white;
-    border-radius: 32px;
-
-    box-shadow: 0 7px 18px rgba(100, 70, 130, 0.12);
-
-    font-size: 70px;
-    line-height: 1;
-
-    flex-shrink: 0;
+.rabbit-head b,
+.rabbit-face b,
+.cat-head b {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: normal;
+    color: #b47794;
 }
 
 
-/* =========================================
-   MAIN
-   ========================================= */
+/* 메인 */
 
 main {
     width: 90%;
     max-width: 1100px;
     margin: 35px auto 70px;
 }
-
-
-/* =========================================
-   DATE
-   ========================================= */
 
 .date-section {
     display: flex;
@@ -108,80 +132,43 @@ main {
     font-size: 23px;
 }
 
-#mealDate {
-    height: 48px;
-    padding: 0 15px;
-
-    border: 2px solid #dfcff0;
-    border-radius: 15px;
-
-    background: white;
-    color: #60477a;
-
-    font-size: 15px;
-    font-family: inherit;
-
-    outline: none;
-}
-
-#mealDate:focus {
-    border-color: #b99bd4;
-}
-
 .date-section button {
     height: 48px;
     padding: 0 18px;
-
     border: none;
     border-radius: 15px;
-
     background: white;
     color: #75598e;
-
     font-size: 18px;
-    font-weight: 700;
-
-    box-shadow: 0 4px 12px rgba(100, 70, 130, 0.08);
-
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(100,70,130,.08);
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.date-section button:hover {
-    background: #f3eafa;
-    transform: translateY(-2px);
+#mealDate {
+    height: 48px;
+    padding: 0 15px;
+    border: 2px solid #dfcff0;
+    border-radius: 15px;
+    background: white;
+    color: #60477a;
 }
 
 #searchBtn {
     background: #a98acb;
     color: white;
-    padding: 0 22px;
-}
-
-#searchBtn:hover {
-    background: #9271b7;
 }
 
 
-/* =========================================
-   CARD
-   ========================================= */
+/* 카드 */
 
 .card {
     background: white;
-
     padding: 32px;
     margin-bottom: 25px;
-
     border-radius: 28px;
-
-    box-shadow: 0 7px 25px rgba(100, 70, 130, 0.07);
+    box-shadow: 0 7px 25px rgba(100,70,130,.07);
 }
-
-
-/* =========================================
-   SECTION TITLE
-   ========================================= */
 
 .section-title {
     display: flex;
@@ -196,28 +183,16 @@ main {
 
 .section-title h2 {
     margin: 0;
-
     color: #60477a;
     font-size: 25px;
-    font-weight: 800;
 }
-
-
-/* =========================================
-   DATE TEXT
-   ========================================= */
 
 .date-text {
-    margin: 0 0 25px;
-
     color: #9685a2;
-    font-size: 15px;
 }
 
 
-/* =========================================
-   MEAL CONTENT
-   ========================================= */
+/* 급식 */
 
 .meal-content {
     display: flex;
@@ -225,175 +200,161 @@ main {
     gap: 30px;
 }
 
-
-/* =========================================
-   급식 토끼
-   ========================================= */
-
 .meal-character {
     width: 150px;
     min-width: 150px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     text-align: center;
-
     color: #806a91;
-    font-size: 16px;
-    font-weight: 600;
+    font-weight: bold;
+}
+
+.meal-rabbit {
+    position: relative;
+    width: 120px;
+    height: 125px;
+    margin: auto;
+}
+
+.rabbit-ear {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 60px;
+    background: white;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+}
+
+.rabbit-ear.left {
+    left: 25px;
+}
+
+.rabbit-ear.right {
+    right: 25px;
 }
 
 .rabbit-face {
-    width: 105px;
-    height: 105px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #fff9fd;
-
-    border: 3px solid #f0dff0;
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    width: 100px;
+    height: 82px;
+    background: white;
+    border: 3px solid #eadbea;
     border-radius: 50%;
-
-    font-size: 70px;
-
-    box-shadow: 0 5px 15px rgba(130, 90, 150, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
 }
 
-.meal-character > span {
-    display: block;
-    margin-top: 10px;
+.rabbit-face b {
+    bottom: 10px;
 }
-
-
-/* =========================================
-   중식 / 석식 2열
-   ========================================= */
 
 .meal-columns {
     flex: 1;
-
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: 1fr 1fr;
     gap: 18px;
 }
 
-
-/* =========================================
-   각각의 급식 상자
-   ========================================= */
-
 .meal-box {
+    padding: 20px;
     background: #fcf9ff;
-
     border: 2px solid #eee4f6;
     border-radius: 22px;
-
-    padding: 20px;
-
-    min-width: 0;
 }
 
 .meal-box h3 {
     margin: 0 0 15px;
-
     text-align: center;
-
     color: #6d5085;
-    font-size: 20px;
-    font-weight: 800;
 }
 
 .meal-box ul {
     margin: 0;
     padding: 0;
-
     list-style: none;
 }
 
 .meal-box li {
     padding: 10px 12px;
     margin-bottom: 8px;
-
     background: white;
-
     border-radius: 13px;
-
-    color: #5b4b69;
     font-size: 14px;
-
-    box-shadow: 0 2px 7px rgba(100, 70, 130, 0.04);
-}
-
-.meal-box li:last-child {
-    margin-bottom: 0;
 }
 
 
-/* =========================================
-   RATING
-   ========================================= */
+/* 고양이 */
 
 .rating-content {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 60px;
-
-    padding-top: 10px;
 }
-
-
-/* =========================================
-   고양이
-   ========================================= */
 
 .cat-character {
     width: 190px;
-
     text-align: center;
-
     color: #806a91;
-    font-size: 16px;
-    font-weight: 600;
-
-    line-height: 1.6;
+    font-weight: bold;
 }
 
-.cat-face {
-    width: 120px;
-    height: 120px;
+.cat-art {
+    position: relative;
+    width: 130px;
+    height: 125px;
+    margin: auto;
+}
 
-    margin: 0 auto;
+.cat-ear {
+    position: absolute;
+    top: 4px;
+    width: 38px;
+    height: 42px;
+    background: #fff;
+    border: 3px solid #eadfd7;
+    transform: rotate(25deg);
+}
 
+.cat-ear.left {
+    left: 15px;
+}
+
+.cat-ear.right {
+    right: 15px;
+    transform: rotate(-25deg);
+}
+
+.cat-head {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 110px;
+    height: 90px;
+    background: white;
+    border: 3px solid #eadfd7;
+    border-radius: 48%;
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    background: #fffaf5;
-
-    border: 3px solid #f3e5d7;
-    border-radius: 50%;
-
-    font-size: 78px;
-
-    box-shadow: 0 5px 15px rgba(150, 110, 80, 0.08);
+    align-items: center;
+    gap: 24px;
 }
 
-.cat-character > span {
-    display: block;
-    margin-top: 10px;
+.cat-head span {
+    color: #8f72a5;
+    font-size: 25px;
+}
+
+.cat-head b {
+    bottom: 12px;
 }
 
 
-/* =========================================
-   RATING RESULT
-   ========================================= */
+/* 별점 */
 
 .rating-result {
     text-align: center;
@@ -401,203 +362,104 @@ main {
 
 #averageRating {
     font-size: 50px;
-    font-weight: 800;
+    font-weight: bold;
     color: #755492;
 }
 
-.stars {
+.stars,
+.review-stars {
     color: #f3b64b;
     font-size: 30px;
     letter-spacing: 3px;
 }
 
 .rating-result p {
-    margin: 8px 0 0;
-
     color: #9a8ca4;
-    font-size: 14px;
 }
 
 
-/* =========================================
-   REVIEW WRITE
-   ========================================= */
+/* 리뷰 */
 
 .guide {
-    margin: 0 0 15px;
     color: #8d7b99;
 }
 
 .rating-input {
     display: flex;
     gap: 4px;
-    margin-bottom: 18px;
 }
 
 .star-btn {
     padding: 3px;
-
     border: none;
     background: transparent;
-
     color: #f3b64b;
-
     font-size: 38px;
-    line-height: 1;
-
     cursor: pointer;
-}
-
-.star-btn:hover {
-    transform: scale(1.12);
-    background: transparent;
 }
 
 #reviewText {
     width: 100%;
     min-height: 130px;
-
     padding: 17px;
-
     border: 2px solid #eee3f5;
     border-radius: 18px;
-
-    background: #fdfaff;
-
-    color: #554665;
     font-family: inherit;
-    font-size: 15px;
-
     resize: vertical;
-    outline: none;
-}
-
-#reviewText:focus {
-    border-color: #c4a7dc;
-}
-
-#reviewText::placeholder {
-    color: #b1a4ba;
 }
 
 .submit-btn {
     width: 100%;
-
     margin-top: 14px;
     padding: 15px;
-
     border: none;
     border-radius: 17px;
-
-    background: linear-gradient(135deg, #aa8ccc, #bd9dd8);
-
+    background: linear-gradient(135deg,#aa8ccc,#bd9dd8);
     color: white;
-
     font-size: 17px;
-    font-weight: 700;
-
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(130, 90, 160, 0.18);
-}
-
-
-/* =========================================
-   RECENT REVIEW
-   ========================================= */
-
-#reviewList {
-    margin-top: 10px;
+    font-weight: bold;
 }
 
 .review-item {
     padding: 17px 20px;
     margin-bottom: 10px;
-
     background: #faf6ff;
     border: 1px solid #eee4f6;
-
     border-radius: 17px;
 }
 
 .review-stars {
-    color: #f3b64b;
     font-size: 18px;
 }
 
-.review-item p {
-    margin: 7px 0 0;
-}
-
 .empty-message {
-    padding: 20px;
-
     text-align: center;
-
     color: #a294ac;
 }
 
-
-/* =========================================
-   FOOTER
-   ========================================= */
-
 footer {
-    padding: 25px 15px;
-
+    padding: 25px;
     text-align: center;
-
     color: #9b8ca7;
     font-size: 13px;
 }
 
 
-/* =========================================
-   MOBILE
-   ========================================= */
+/* 모바일 */
 
 @media (max-width: 800px) {
 
-    header {
-        padding: 25px 15px;
-    }
-
     .header-content {
-        width: 100%;
         flex-direction: column;
         text-align: center;
-    }
-
-    .chef-rabbit {
-        width: 90px;
-        height: 90px;
-        font-size: 58px;
     }
 
     header h1 {
         font-size: 30px;
     }
 
-    header p {
-        font-size: 15px;
-    }
-
-    main {
-        width: 94%;
-        margin-top: 25px;
-    }
-
-    .date-section {
-        flex-wrap: wrap;
-    }
-
     .meal-content {
         flex-direction: column;
-        gap: 20px;
     }
 
     .meal-character {
@@ -610,23 +472,8 @@ footer {
 
     .rating-content {
         flex-direction: column;
-        gap: 25px;
-    }
-
-    .card {
-        padding: 23px 18px;
-        border-radius: 24px;
-    }
-
-    .section-title h2 {
-        font-size: 22px;
     }
 }
-
-
-/* =========================================
-   작은 휴대폰
-   ========================================= */
 
 @media (max-width: 520px) {
 
@@ -635,14 +482,6 @@ footer {
     }
 
     .date-section {
-        gap: 7px;
-    }
-
-    #mealDate {
-        width: 170px;
-    }
-
-    .date-section button {
-        padding: 0 12px;
+        flex-wrap: wrap;
     }
 }
