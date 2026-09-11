@@ -1,223 +1,643 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학산급식리뷰</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<header>
-    <div class="header-content">
-        <div class="chef-rabbit">
-            <div class="rabbit-character">
-                <div class="chef-hat"></div>
-                <div class="rabbit-ear rabbit-ear-left"></div>
-                <div class="rabbit-ear rabbit-ear-right"></div>
-                <div class="rabbit-head">
-                    <div class="rabbit-eye"></div>
-                    <div class="rabbit-eye"></div>
-                    <div class="rabbit-mouth"></div>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <h1>학산급식리뷰</h1>
-            <p>오늘 뭐 나와? 🍚</p>
-        </div>
-    </div>
-</header>
-
-<main>
-
-    <section class="date-section">
-        <button id="prevDay">〈</button>
-
-        <div>
-            <span>📅</span>
-            <input type="date" id="mealDate">
-        </div>
-
-        <button id="nextDay">〉</button>
-        <button id="searchBtn">급식 보기</button>
-    </section>
-
-
-    <section class="card meal-card">
-
-        <div class="section-title">
-            <span>🍱</span>
-            <h2>오늘의 급식</h2>
-        </div>
-
-        <p id="mealDateText" class="date-text">
-            오늘의 급식을 확인해보세요!
-        </p>
-
-        <div class="meal-content">
-
-            <div class="meal-character">
-
-                <div class="big-rabbit">
-                    <div class="big-ear left"></div>
-                    <div class="big-ear right"></div>
-
-                    <div class="big-rabbit-head">
-                        <div class="big-eye"></div>
-                        <div class="big-eye"></div>
-                        <div class="big-mouth">⌣</div>
-                    </div>
-                </div>
-
-                <span>맛있게 드세요! 💕</span>
-
-            </div>
-
-
-            <div class="meal-columns">
-
-                <div class="meal-box">
-                    <h3>🍚 중식</h3>
-
-                    <ul id="lunchList">
-                        <li>급식 정보를 불러오는 중이에요!</li>
-                    </ul>
-                </div>
-
-
-                <div class="meal-box">
-                    <h3>🌙 석식</h3>
-
-                    <ul id="dinnerList">
-                        <li>급식 정보를 불러오는 중이에요!</li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <section class="card rating-card">
-
-        <div class="section-title">
-            <span>⭐</span>
-            <h2>오늘의 만족도</h2>
-        </div>
-
-        <div class="rating-content">
-
-            <div class="cat-character">
-
-                <div class="cute-cat">
-
-                    <div class="cat-ear left"></div>
-                    <div class="cat-ear right"></div>
-
-                    <div class="cat-head">
-
-                        <div class="cat-eye">
-                            <i></i>
-                        </div>
-
-                        <div class="cat-eye">
-                            <i></i>
-                        </div>
-
-                        <div class="cat-mouth">ᴗ</div>
-
-                    </div>
-
-                </div>
-
-                <span>
-                    맛있었나요...?<br>
-                    별점 부탁해요! ✨
-                </span>
-
-            </div>
-
-
-            <div class="rating-result">
-
-                <div id="averageRating">0.0</div>
-
-                <div id="averageStars" class="stars">
-                    ☆☆☆☆☆
-                </div>
-
-                <p>
-                    <span id="reviewCount">0</span>개의 리뷰
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <section class="card review-write">
-
-        <div class="section-title">
-            <span>✏️</span>
-            <h2>리뷰 작성</h2>
-        </div>
-
-        <p class="guide">
-            오늘 급식은 어땠나요?
-        </p>
-
-        <div class="rating-input">
-
-            <button class="star-btn" data-rating="1">☆</button>
-            <button class="star-btn" data-rating="2">☆</button>
-            <button class="star-btn" data-rating="3">☆</button>
-            <button class="star-btn" data-rating="4">☆</button>
-            <button class="star-btn" data-rating="5">☆</button>
-
-        </div>
-
-        <textarea
-            id="reviewText"
-            placeholder="급식에 대한 솔직한 리뷰를 남겨주세요! 💕"
-            maxlength="100"></textarea>
-
-        <button id="submitReview" class="submit-btn">
-            리뷰 등록하기 💕
-        </button>
-
-    </section>
-
-
-    <section class="card">
-
-        <div class="section-title">
-            <span>💬</span>
-            <h2>최근 리뷰</h2>
-        </div>
-
-        <div id="reviewList">
-            <p class="empty-message">
-                아직 작성된 리뷰가 없어요 🥺
-            </p>
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-    <p>🍚 학산여자고등학교 급식 리뷰 프로젝트</p>
-</footer>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+    background: #fbf8ff;
+    color: #554665;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: linear-gradient(135deg, #e9dcfa, #f9e3f0);
+    padding: 30px 20px;
+    border-radius: 0 0 35px 35px;
+    box-shadow: 0 5px 20px rgba(100,70,130,.08);
+}
+
+.header-content {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 800;
+    color: #60477a;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #806a91;
+    font-size: 18px;
+}
+
+
+/* =========================
+   토끼
+========================= */
+
+.chef-rabbit {
+    width: 105px;
+    height: 105px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    border-radius: 32px;
+    box-shadow: 0 7px 18px rgba(100,70,130,.12);
+}
+
+.rabbit-face {
+    position: relative;
+    width: 72px;
+    height: 62px;
+    background: #fff;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+}
+
+/* 귀 */
+.rabbit-face::before,
+.rabbit-face::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 38px;
+    background: #fff;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+    top: -30px;
+}
+
+.rabbit-face::before {
+    left: 9px;
+    transform: rotate(-7deg);
+}
+
+.rabbit-face::after {
+    right: 9px;
+    transform: rotate(7deg);
+}
+
+/* 토끼 눈 */
+.rabbit-eye {
+    position: absolute;
+    width: 11px;
+    height: 14px;
+    background: #5b4b69;
+    border-radius: 50%;
+    top: 23px;
+}
+
+.rabbit-eye.left {
+    left: 17px;
+}
+
+.rabbit-eye.right {
+    right: 17px;
+}
+
+.rabbit-eye::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+
+.rabbit-mouth {
+    position: absolute;
+    left: 50%;
+    bottom: 11px;
+    transform: translateX(-50%);
+    color: #c7839d;
+    font-size: 15px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto 70px;
+}
+
+
+/* =========================
+   날짜
+========================= */
+
+.date-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.date-section > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-section button {
+    height: 48px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 15px;
+    background: white;
+    color: #75598e;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(100,70,130,.08);
+    cursor: pointer;
+}
+
+.date-section button:hover {
+    background: #f3eafa;
+}
+
+#mealDate {
+    height: 48px;
+    padding: 0 15px;
+    border: 2px solid #dfcff0;
+    border-radius: 15px;
+    background: white;
+    color: #60477a;
+    font-family: inherit;
+}
+
+#searchBtn {
+    background: #a98acb;
+    color: white;
+}
+
+
+/* =========================
+   카드
+========================= */
+
+.card {
+    background: white;
+    padding: 32px;
+    margin-bottom: 25px;
+    border-radius: 28px;
+    box-shadow: 0 7px 25px rgba(100,70,130,.07);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.section-title span {
+    font-size: 27px;
+}
+
+.section-title h2 {
+    margin: 0;
+    color: #60477a;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.date-text {
+    margin: 0 0 25px;
+    color: #9685a2;
+}
+
+
+/* =========================
+   급식
+========================= */
+
+.meal-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.meal-character {
+    width: 150px;
+    min-width: 150px;
+    text-align: center;
+    color: #806a91;
+    font-weight: 600;
+}
+
+
+/* 큰 토끼 얼굴 */
+
+.big-rabbit {
+    position: relative;
+    width: 110px;
+    height: 95px;
+    margin: 0 auto 10px;
+}
+
+.big-rabbit-face {
+    position: absolute;
+    left: 5px;
+    bottom: 0;
+    width: 100px;
+    height: 78px;
+    background: white;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+}
+
+
+/* 귀 */
+
+.big-rabbit-ear {
+    position: absolute;
+    top: 0;
+    width: 28px;
+    height: 52px;
+    background: white;
+    border: 3px solid #eadbea;
+    border-radius: 50%;
+}
+
+.big-rabbit-ear.left {
+    left: 18px;
+    transform: rotate(-7deg);
+}
+
+.big-rabbit-ear.right {
+    right: 18px;
+    transform: rotate(7deg);
+}
+
+
+/* 눈 */
+
+.big-rabbit-eye {
+    position: absolute;
+    top: 28px;
+    width: 12px;
+    height: 16px;
+    background: #554665;
+    border-radius: 50%;
+}
+
+.big-rabbit-eye.left {
+    left: 25px;
+}
+
+.big-rabbit-eye.right {
+    right: 25px;
+}
+
+.big-rabbit-eye::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+
+.big-rabbit-mouth {
+    position: absolute;
+    left: 50%;
+    bottom: 13px;
+    transform: translateX(-50%);
+    color: #c7839d;
+    font-size: 17px;
+}
+
+
+/* =========================
+   중식 / 석식
+========================= */
+
+.meal-columns {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.meal-box {
+    padding: 20px;
+    background: #fcf9ff;
+    border: 2px solid #eee4f6;
+    border-radius: 22px;
+}
+
+.meal-box h3 {
+    margin: 0 0 15px;
+    text-align: center;
+    color: #6d5085;
+}
+
+.meal-box ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.meal-box li {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 13px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   만족도
+========================= */
+
+.rating-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.cat-character {
+    width: 190px;
+    text-align: center;
+    color: #806a91;
+    font-weight: 600;
+}
+
+
+/* 고양이 얼굴 */
+
+.cute-cat {
+    position: relative;
+    width: 120px;
+    height: 105px;
+    margin: 0 auto 10px;
+}
+
+.cat-face {
+    position: absolute;
+    left: 5px;
+    bottom: 0;
+    width: 110px;
+    height: 82px;
+    background: #fff;
+    border: 3px solid #eadfd7;
+    border-radius: 48%;
+}
+
+
+/* 고양이 귀 - 둥글게 */
+
+.cat-ear {
+    position: absolute;
+    top: 3px;
+    width: 38px;
+    height: 38px;
+    background: white;
+    border: 3px solid #eadfd7;
+    border-radius: 45% 45% 20% 20%;
+}
+
+.cat-ear.left {
+    left: 8px;
+    transform: rotate(-18deg);
+}
+
+.cat-ear.right {
+    right: 8px;
+    transform: rotate(18deg);
+}
+
+
+/* ✨ 초롱초롱 고양이 눈 */
+
+.cat-eye {
+    position: absolute;
+    top: 28px;
+    width: 19px;
+    height: 25px;
+    background: #655071;
+    border-radius: 50%;
+}
+
+.cat-eye.left {
+    left: 25px;
+}
+
+.cat-eye.right {
+    right: 25px;
+}
+
+
+/* 눈 안의 반짝임 */
+
+.cat-eye::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 4px;
+}
+
+.cat-eye::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    bottom: 5px;
+    right: 4px;
+}
+
+
+/* 고양이 입 */
+
+.cat-mouth {
+    position: absolute;
+    left: 50%;
+    bottom: 13px;
+    transform: translateX(-50%);
+    color: #c08091;
+    font-size: 18px;
+}
+
+
+/* =========================
+   별점
+========================= */
+
+.rating-result {
+    text-align: center;
+}
+
+#averageRating {
+    font-size: 50px;
+    font-weight: 800;
+    color: #755492;
+}
+
+.stars {
+    color: #f3b64b;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+.rating-result p {
+    margin: 8px 0;
+    color: #9a8ca4;
+}
+
+
+/* =========================
+   리뷰
+========================= */
+
+.guide {
+    color: #8d7b99;
+}
+
+.rating-input {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+}
+
+.star-btn {
+    padding: 3px;
+    border: none;
+    background: transparent;
+    color: #f3b64b;
+    font-size: 38px;
+    cursor: pointer;
+}
+
+#reviewText {
+    width: 100%;
+    min-height: 130px;
+    padding: 17px;
+    border: 2px solid #eee3f5;
+    border-radius: 18px;
+    background: #fdfaff;
+    color: #554665;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 15px;
+    border: none;
+    border-radius: 17px;
+    background: linear-gradient(135deg,#aa8ccc,#bd9dd8);
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.review-item {
+    padding: 17px 20px;
+    margin-bottom: 10px;
+    background: #faf6ff;
+    border: 1px solid #eee4f6;
+    border-radius: 17px;
+}
+
+.review-stars {
+    color: #f3b64b;
+}
+
+.empty-message {
+    padding: 20px;
+    text-align: center;
+    color: #a294ac;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 25px;
+    text-align: center;
+    color: #9b8ca7;
+    font-size: 13px;
+}
+
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 800px) {
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .meal-content {
+        flex-direction: column;
+    }
+
+    .meal-character {
+        width: 100%;
+    }
+
+    .meal-columns {
+        width: 100%;
+    }
+
+    .rating-content {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .meal-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .date-section {
+        flex-wrap: wrap;
+    }
+}
